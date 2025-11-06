@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Elms Sans";
+  src: url("./assets/fonts/ElmsSans.woff2");
+}
+
+body {
+  font-family: "Elms Sans";
+  font-weight: 400;
+}
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,

@@ -1,7 +1,16 @@
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "@/components/layout/Layout.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [{ path: "/" }],
+  },
+]);
 
 function App() {
-  return <p className="text-bold text-[36px]"> yooyoyo </p>;
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
