@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { selectTab } from "@/features/tab/tabSlice";
-import { CircleCheckBig, LayoutGrid, Users } from "lucide-react";
+import { SquareCheckBig, LayoutGrid, Users } from "lucide-react";
 import { swap } from "@/features/tab/tabSlice";
 export default function Footer() {
   const tab = useAppSelector(selectTab);
@@ -14,7 +14,7 @@ export default function Footer() {
           tab === "tasks" ? activeStyles : ""
         }`}
       >
-        <CircleCheckBig color={tab === "tasks" ? "#193cb8" : "#62748e"} />
+        <SquareCheckBig color={tab === "tasks" ? "#193cb8" : "#62748e"} />
         <p> Tasks</p>
       </button>
       <button
