@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13
+    container_name: worknest_postgres
+    environment:
+      POSTGRES_USER: worknest
+      POSTGRES_PASSWORD: worknest_password
+      POSTGRES_DB: worknest
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

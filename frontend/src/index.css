@@ -5,9 +5,43 @@
   src: url("./assets/fonts/ElmsSans.woff2");
 }
 
+#alert-portal {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
 body {
   font-family: "Elms Sans";
   font-weight: 400;
+}
+
+.slideIn {
+  animation: slideIn 300ms ease-out both;
+}
+
+.slideOut {
+  animation: slideOut 300ms ease-in both;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(120vw);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(-120vw);
+  }
 }
 
 /* 1. Use a more-intuitive box-sizing model */

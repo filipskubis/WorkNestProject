@@ -33,7 +33,7 @@ export default function Sidebar({
     setOnScreen(false);
     setTimeout(() => {
       setActive(false);
-    }, 500);
+    }, 300);
   }
   const activeStyles = "bg-blue-50 rounded-lg text-blue-600";
 
