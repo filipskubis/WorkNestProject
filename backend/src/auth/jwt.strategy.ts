@@ -12,12 +12,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (req: Request) => {
+        (req: Request): string | null => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
           return req?.cookies?.token || null;
         },
       ]),
       ignoreExpiration: false,
-      secretOrKey: process.env.JWT_SECRET as string, // We've already checked it's defined above
+      secretOrKey: process.env.JWT_SECRET as string,
     });
   }
 

@@ -7,8 +7,10 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { AuthDto } from './dtos/auth.dto';
 import * as bcrypt from 'bcrypt';
-import { Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
+
+type SanitizedUser = Omit<User, 'password' | 'createdAt' | 'updatedAt'>;
 
 @Injectable()
 export class AuthService {
@@ -24,7 +26,7 @@ export class AuthService {
     });
   }
 
-  async login(authDto: AuthDto) {
+  async login(authDto: Omit<AuthDto, 'name'>) {
     const user = await this.prisma.user.findUnique({
       where: { email: authDto.email },
     });
@@ -35,7 +37,25 @@ export class AuthService {
 
     const token = this.generateToken(user);
 
-    return { user: { id: user.id, email: user.email }, token };
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    return { user: { id: user.id, email: user.email, name: user.name }, token };
+  }
+
+  async getCurrentUser(userId: number): Promise<SanitizedUser> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        name: true,
+        id: true,
+        email: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return user;
   }
 
   async register(authDto: AuthDto) {
@@ -44,11 +64,13 @@ export class AuthService {
 
       const user = await this.prisma.user.create({
         data: {
+          name: authDto.name,
           email: authDto.email,
           password: hashedPassword,
         },
         select: {
           id: true,
+          name: true,
           email: true,
           createdAt: true,
         },

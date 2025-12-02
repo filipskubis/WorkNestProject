@@ -12,16 +12,14 @@ async function main() {
   // Create sample users
   const users = [
     {
-      email: 'user1@example.com',
-      password: await hash('password123', 12),
+      email: 'filipskubis@gmail.com',
+      name: 'Felipe',
+      password: await hash('123123123123K!', 12),
     },
     {
-      email: 'user2@example.com',
-      password: await hash('password123', 12),
-    },
-    {
-      email: 'admin@example.com',
-      password: await hash('admin123', 12),
+      email: 'admin@gmail.com',
+      name: 'Admin',
+      password: await hash('123123123123K!', 12),
     },
   ];
 
